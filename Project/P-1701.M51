@@ -1,0 +1,586 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        09/30/2015  23:53:45  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\PROGRAM FILES\KEIL\C51\BIN\BL51.EXE .\sys_core.obj, .\sys_count.obj, .\sys_cpu.obj, .\sys_task.obj, .\sys_eeprom.obj,
+>>  .\sys_delay.obj, .\sys_uart.obj, .\main.obj, .\hwa_mifare.obj, .\hwa_eeprom.obj, .\hwa_eeprom_cfg.obj, .\mifare.obj,
+>>  .\drive_buzzer.obj, .\drive_led.obj, .\drive_relay.obj, .\app_brush.obj, .\app_config.obj, .\app_time.obj TO project
+>>  RAMSIZE (256)
+
+
+MEMORY MODEL: LARGE
+
+
+INPUT MODULES INCLUDED:
+  .\sys_core.obj (SYS_CORE)
+  .\sys_count.obj (SYS_COUNT)
+  .\sys_cpu.obj (SYS_CPU)
+  .\sys_task.obj (SYS_TASK)
+  .\sys_eeprom.obj (SYS_EEPROM)
+  .\sys_delay.obj (SYS_DELAY)
+  .\sys_uart.obj (SYS_UART)
+  .\main.obj (MAIN)
+  .\hwa_mifare.obj (HWA_MIFARE)
+  .\hwa_eeprom.obj (HWA_EEPROM)
+  .\hwa_eeprom_cfg.obj (HWA_EEPROM_CFG)
+  .\mifare.obj (MIFARE)
+  .\drive_buzzer.obj (DRIVE_BUZZER)
+  .\drive_led.obj (DRIVE_LED)
+  .\drive_relay.obj (DRIVE_RELAY)
+  .\app_brush.obj (APP_BRUSH)
+  .\app_config.obj (APP_CONFIG)
+  .\app_time.obj (APP_TIME)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C_STARTUP)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?COPY)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?CLDPTR)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?CLDOPTR)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?CILDPTR)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?CILDOPTR)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?CSTPTR)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?CSTOPTR)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?IMUL)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?UIDIV)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?IILDX)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?ILDIX)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?ICALL)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (STRLEN)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?MEMCMP)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C?MEMSET)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51L.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  project (SYS_CORE)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0015H     UNIT         ?DT?MIFARE
+                    001DH     0003H                  *** GAP ***
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 2
+
+
+            BIT     0020H.0   0000H.1   UNIT         ?BI?SYS_CORE
+                    0020H.1   0000H.7                *** GAP ***
+            DATA    0021H     0012H     UNIT         ?DT?DRIVE_LED
+            IDATA   0033H     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     0068H     UNIT         ?XD?HWA_EEPROM_CFG
+            XDATA   0068H     0051H     UNIT         ?XD?SYS_CORE
+            XDATA   00B9H     002EH     UNIT         _XDATA_GROUP_
+            XDATA   00E7H     0022H     UNIT         ?XD?HWA_MIFARE
+            XDATA   0109H     0021H     UNIT         ?XD?APP_CONFIG
+            XDATA   012AH     0013H     UNIT         ?XD?SYS_UART
+            XDATA   013DH     000DH     UNIT         ?XD?APP_BRUSH
+            XDATA   014AH     000CH     UNIT         ?XD?APP_TIME
+            XDATA   0156H     0004H     UNIT         ?XD?_SYS_UARTREADDATA?SYS_UART
+            XDATA   015AH     0003H     UNIT         ?XD?_SYS_UARTSENDDATA?SYS_UART
+            XDATA   015DH     0003H     UNIT         ?XD?_SYS_UARTSENDSTRING?SYS_UART
+            XDATA   0160H     0002H     UNIT         ?XD?DRIVE_BUZZER
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0008H     UNIT         ?PR?APP_CONFIG
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     0015H     UNIT         ?PR?SYS_TASKINIT?SYS_CORE
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     0434H     UNIT         ?C?LIB_CODE
+            CODE    045AH     028EH     UNIT         ?PR?APP_BRUSHCYCLE200MS?APP_BRUSH
+            CODE    06E8H     0190H     UNIT         ?PR?_HWA_EEPROMREADSECTOR?HWA_EEPROM
+            CODE    0878H     00E1H     UNIT         ?PR?_HWA_EEPROMWRITESECTOR?HWA_EEPROM
+            CODE    0959H     00D6H     UNIT         ?PR?_HWA_MIFAREREADSECTOR?HWA_MIFARE
+            CODE    0A2FH     00CAH     UNIT         ?PR?APP_TIMEPOWER1MIN?APP_TIME
+            CODE    0AF9H     00B2H     UNIT         ?PR?_APP_BRUSHNOTIFYREFUND?APP_BRUSH
+            CODE    0BABH     00B1H     UNIT         ?PR?APP_BRUSHCARD?APP_BRUSH
+            CODE    0C5CH     00B0H     UNIT         ?PR?SYSTENSETTINGINIT?APP_CONFIG
+            CODE    0D0CH     00A6H     UNIT         ?PR?HWA_EEPROM
+            CODE    0DB2H     009DH     UNIT         ?PR?INIT_FM1702?MIFARE
+            CODE    0E4FH     009AH     UNIT         ?PR?_AUTHENTICATION?MIFARE
+            CODE    0EE9H     0096H     UNIT         ?PR?DRV_LEDHANDLER1MS?DRIVE_LED
+            CODE    0F7FH     008EH     UNIT         ?PR?_WRITE_BLOCK?MIFARE
+            CODE    100DH     008CH     UNIT         ?C_C51STARTUP
+            CODE    1099H     0087H     UNIT         ?C_INITSEG
+            CODE    1120H     0082H     UNIT         ?PR?_LOAD_KEY?MIFARE
+            CODE    11A2H     0080H     UNIT         ?PR?APP_TIMEDISPLAY500MS?APP_TIME
+            CODE    1222H     007BH     UNIT         ?PR?SYS_TASKSCHEDULER?SYS_CORE
+            CODE    129DH     0075H     UNIT         ?PR?MIFARE
+            CODE    1312H     0071H     UNIT         ?PR?_DRV_LEDREQUESTDISPLAYCHANNEL?DRIVE_LED
+            CODE    1383H     006EH     UNIT         ?PR?ANTICOLL?MIFARE
+            CODE    13F1H     006EH     UNIT         ?PR?_DRV_LEDDISPLAYCHANNEL?DRIVE_LED
+            CODE    145FH     006DH     UNIT         ?PR?_SYS_TASKCREATE?SYS_CORE
+            CODE    14CCH     006CH     UNIT         ?PR?_HWA_MIFARECHECKOUT?HWA_MIFARE
+            CODE    1538H     006BH     UNIT         ?PR?_HWA_EEPROMCHECK?HWA_EEPROM
+            CODE    15A3H     0068H     UNIT         ?PR?RETURNCARDID?APP_BRUSH
+            CODE    160BH     0066H     UNIT         ?PR?SYS_UARTINTERRUPT?SYS_UART
+            CODE    1671H     0066H     UNIT         ?PR?_HWA_MIFAREWRITESECTOR?HWA_MIFARE
+            CODE    16D7H     0064H     UNIT         ?PR?HWA_MIFARECHECKBLOCK?HWA_MIFARE
+            CODE    173BH     0063H     UNIT         ?PR?_REQUEST?MIFARE
+            CODE    179EH     0063H     UNIT         ?PR?SELECTCARD?MIFARE
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 3
+
+
+            CODE    1801H     0061H     UNIT         ?PR?_DRV_LEDSHOWNUMBER?DRIVE_LED
+            CODE    1862H     0060H     UNIT         ?PR?_SYS_TASKDEL?SYS_CORE
+            CODE    18C2H     005CH     UNIT         ?PR?SYS_TASKSTART?SYS_CORE
+            CODE    191EH     005AH     UNIT         ?PR?SYS_TASKADD?SYS_TASK
+            CODE    1978H     0058H     UNIT         ?PR?_APP_BRUSHNOTIFYBRUSH?APP_BRUSH
+            CODE    19D0H     0056H     UNIT         ?PR?SYS_CORE
+            CODE    1A26H     0053H     UNIT         ?PR?APP_BRUSH
+            CODE    1A79H     004FH     UNIT         ?PR?_READ_BLOCK?MIFARE
+            CODE    1AC8H     0048H     UNIT         ?PR?_SYS_UARTREADDATA?SYS_UART
+            CODE    1B10H     0047H     UNIT         ?PR?APP_SHOW?APP_BRUSH
+            CODE    1B57H     0044H     UNIT         ?PR?_COMMAND_SEND?MIFARE
+            CODE    1B9BH     0043H     UNIT         ?PR?_APP_TIMECLEAR?APP_TIME
+            CODE    1BDEH     0042H     UNIT         ?PR?_SYS_EEPROMREAD?SYS_EEPROM
+            CODE    1C20H     0041H     UNIT         ?PR?_SPIWRITEONE?MIFARE
+            CODE    1C61H     003FH     UNIT         ?PR?SYS_UARTRXHANDLER?SYS_UART
+            CODE    1CA0H     003EH     UNIT         ?PR?_APP_TIMEADDMONEY?APP_TIME
+            CODE    1CDEH     003BH     UNIT         ?PR?SYS_TIMEHANDLER?SYS_CPU
+            CODE    1D19H     003AH     UNIT         ?PR?_SYS_UARTSENDDATA?SYS_UART
+            CODE    1D53H     0034H     UNIT         ?PR?_READ_FIFO?MIFARE
+            CODE    1D87H     0032H     UNIT         ?PR?HWA_EEPROM_CFG
+            CODE    1DB9H     0032H     UNIT         ?PR?DRIVE_LED
+            CODE    1DEBH     0031H     UNIT         ?PR?_SPIREADONE?MIFARE
+            CODE    1E1CH     0030H     UNIT         ?PR?_SYS_EEPROMWRITE?SYS_EEPROM
+            CODE    1E4CH     0030H     UNIT         ?PR?MIF_HALT?MIFARE
+            CODE    1E7CH     002DH     UNIT         ?PR?HWA_MIFARE
+            CODE    1EA9H     002DH     UNIT         ?PR?_HWA_EEPROMENCRYPT?HWA_EEPROM_CFG
+            CODE    1ED6H     002DH     UNIT         ?PR?_HWA_EEPROMDECRYPT?HWA_EEPROM_CFG
+            CODE    1F03H     002CH     UNIT         ?PR?_WRITE_FIFO?MIFARE
+            CODE    1F2FH     0028H     UNIT         ?PR?DRV_BUZZERHANDLER10MS?DRIVE_BUZZER
+            CODE    1F57H     0024H     UNIT         ?PR?_SYS_UARTSETCHANNEL?SYS_UART
+            CODE    1F7BH     0022H     UNIT         ?PR?CLEAR_FIFO?MIFARE
+            CODE    1F9DH     0020H     UNIT         ?PR?_APP_CONFIGREAD?APP_CONFIG
+            CODE    1FBDH     001FH     UNIT         ?PR?SYS_UARTOVERTIME1MS?SYS_UART
+            CODE    1FDCH     001BH     UNIT         ?PR?APP_TIME
+            CODE    1FF7H     001AH     UNIT         ?PR?SYS_INIT?SYS_TASK
+            CODE    2011H     0019H     UNIT         ?PR?DRV_LEDINIT?DRIVE_LED
+            CODE    202AH     0018H     UNIT         ?PR?_SYS_DELAYMS?SYS_DELAY
+            CODE    2042H     0016H     UNIT         ?PR?_SYS_UARTSENDSTRING?SYS_UART
+            CODE    2058H     0016H     UNIT         ?PR?_DRV_RELAYOPEN?DRIVE_RELAY
+            CODE    206EH     0016H     UNIT         ?PR?_DRV_RELAYCLOSE?DRIVE_RELAY
+            CODE    2084H     0016H     UNIT         ?PR?_APP_CONFIGWRITE?APP_CONFIG
+            CODE    209AH     0015H     UNIT         ?PR?_STRLEN?STRLEN
+            CODE    20AFH     0014H     UNIT         ?PR?SYS_UARTINIT?SYS_UART
+            CODE    20C3H     0014H     UNIT         ?PR?SYS_UART
+            CODE    20D7H     0013H     UNIT         ?PR?SYS_EEPROM
+            CODE    20EAH     0013H     UNIT         ?CO?APP_CONFIG
+            CODE    20FDH     0012H     UNIT         ?PR?SYS_TASK
+            CODE    210FH     0010H     UNIT         ?PR?SYS_TIMEINIT?SYS_CPU
+            CODE    211FH     0010H     UNIT         ?PR?_SYS_EEPROMERASESECTOR?SYS_EEPROM
+            CODE    212FH     0010H     UNIT         ?CO?HWA_EEPROM_CFG
+            CODE    213FH     000EH     UNIT         ?CO?DRIVE_LED
+            CODE    214DH     000DH     UNIT         ?PR?IAPIDLE?SYS_EEPROM
+            CODE    215AH     000CH     UNIT         ?PR?MAIN?MAIN
+            CODE    2166H     000BH     UNIT         ?PR?_SYS_DELAYUS?SYS_DELAY
+            CODE    2171H     000BH     UNIT         ?PR?DRV_RELAYINIT?DRIVE_RELAY
+            CODE    217CH     000BH     UNIT         ?PR?APP_TIMESAVETIME?APP_TIME
+            CODE    2187H     0009H     UNIT         ?PR?DRV_BUZZERINIT?DRIVE_BUZZER
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 4
+
+
+            CODE    2190H     0006H     UNIT         ?PR?_DRV_BUZZERNUMBER?DRIVE_BUZZER
+            CODE    2196H     0006H     UNIT         ?CO?APP_BRUSH
+            CODE    219CH     0004H     UNIT         ?PR?SYS_TASKWATCHDOG?SYS_CPU
+            CODE    21A0H     0004H     UNIT         ?PR?SYS_TASKSLEEP?SYS_CPU
+            CODE    21A4H     0003H     UNIT         ?PR?APP_BRUSHINIT?APP_BRUSH
+            CODE    21A7H     0003H     UNIT         ?PR?APP_CONFIGINIT?APP_CONFIG
+            CODE    21AAH     0003H     UNIT         ?PR?APP_TIMEINIT?APP_TIME
+            CODE    21ADH     0001H     UNIT         ?PR?SYS_TASKWATCHDOGINIT?SYS_CPU
+            CODE    21AEH     0001H     UNIT         ?PR?HWA_EEPROMINIT?HWA_EEPROM
+            CODE    21AFH     0001H     UNIT         ?PR?APP_TIMELOAD?APP_TIME
+
+
+
+OVERLAY MAP OF MODULE:   project (SYS_CORE)
+
+
+SEGMENT                                            XDATA_GROUP
+  +--> CALLED SEGMENT                            START    LENGTH
+----------------------------------------------------------------
+?PR?SYS_TIMEHANDLER?SYS_CPU                      -----    -----
+  +--> ?PR?SYS_TASKSCHEDULER?SYS_CORE
+
+?PR?SYS_TASKSCHEDULER?SYS_CORE                   00B9H    0001H
+  +--> ?PR?SYS_CORE
+
+*** NEW ROOT ***************************************************
+
+?PR?SYS_UARTINTERRUPT?SYS_UART                   -----    -----
+  +--> ?PR?SYS_UARTRXHANDLER?SYS_UART
+  +--> ?PR?SYS_UART
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                                    -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                                    -----    -----
+  +--> ?PR?SYS_INIT?SYS_TASK
+  +--> ?PR?SYS_TASKINIT?SYS_CORE
+  +--> ?PR?SYS_TASKADD?SYS_TASK
+  +--> ?PR?SYS_TASKSTART?SYS_CORE
+
+?PR?SYS_INIT?SYS_TASK                            -----    -----
+  +--> ?PR?DRV_BUZZERINIT?DRIVE_BUZZER
+  +--> ?PR?DRV_RELAYINIT?DRIVE_RELAY
+  +--> ?PR?DRV_LEDINIT?DRIVE_LED
+  +--> ?PR?SYS_UARTINIT?SYS_UART
+  +--> ?PR?APP_BRUSHINIT?APP_BRUSH
+  +--> ?PR?APP_CONFIGINIT?APP_CONFIG
+  +--> ?PR?APP_TIMEINIT?APP_TIME
+  +--> ?PR?_DRV_BUZZERNUMBER?DRIVE_BUZZER
+
+?PR?APP_BRUSHINIT?APP_BRUSH                      -----    -----
+  +--> ?PR?INIT_FM1702?MIFARE
+
+?PR?INIT_FM1702?MIFARE                           00BAH    0002H
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 5
+
+
+  +--> ?PR?_SYS_DELAYMS?SYS_DELAY
+  +--> ?PR?_SYS_DELAYUS?SYS_DELAY
+  +--> ?PR?MIFARE
+  +--> ?PR?_SPIWRITEONE?MIFARE
+
+?PR?MIFARE                                       -----    -----
+  +--> ?PR?_SPIREADONE?MIFARE
+  +--> ?PR?_SPIWRITEONE?MIFARE
+
+?PR?APP_CONFIGINIT?APP_CONFIG                    -----    -----
+  +--> ?PR?SYSTENSETTINGINIT?APP_CONFIG
+
+?PR?SYSTENSETTINGINIT?APP_CONFIG                 00BAH    0001H
+  +--> ?PR?HWA_EEPROMINIT?HWA_EEPROM
+  +--> ?PR?_APP_CONFIGREAD?APP_CONFIG
+  +--> ?CO?APP_CONFIG
+  +--> ?PR?_DRV_LEDSHOWNUMBER?DRIVE_LED
+  +--> ?PR?APP_CONFIG
+  +--> ?PR?_APP_CONFIGWRITE?APP_CONFIG
+
+?PR?_APP_CONFIGREAD?APP_CONFIG                   00BBH    0001H
+  +--> ?PR?_HWA_EEPROMREADSECTOR?HWA_EEPROM
+
+?PR?_HWA_EEPROMREADSECTOR?HWA_EEPROM             00CEH    0012H
+  +--> ?PR?HWA_EEPROM
+  +--> ?CO?HWA_EEPROM_CFG
+  +--> ?PR?_HWA_EEPROMDECRYPT?HWA_EEPROM_CFG
+  +--> ?PR?_HWA_EEPROMCHECK?HWA_EEPROM
+  +--> ?PR?_SYS_EEPROMERASESECTOR?SYS_EEPROM
+  +--> ?PR?_SYS_EEPROMWRITE?SYS_EEPROM
+  +--> ?PR?_SYS_EEPROMREAD?SYS_EEPROM
+
+?PR?HWA_EEPROM                                   -----    -----
+  +--> ?CO?HWA_EEPROM_CFG
+
+?PR?_HWA_EEPROMDECRYPT?HWA_EEPROM_CFG            00E0H    0005H
+  +--> ?PR?HWA_EEPROM_CFG
+
+?PR?_HWA_EEPROMCHECK?HWA_EEPROM                  00E0H    0006H
+  +--> ?PR?HWA_EEPROM
+
+?PR?_SYS_EEPROMERASESECTOR?SYS_EEPROM            -----    -----
+  +--> ?PR?SYS_EEPROM
+  +--> ?PR?IAPIDLE?SYS_EEPROM
+
+?PR?_SYS_EEPROMWRITE?SYS_EEPROM                  00E0H    0007H
+  +--> ?PR?SYS_EEPROM
+  +--> ?PR?IAPIDLE?SYS_EEPROM
+
+?PR?_SYS_EEPROMREAD?SYS_EEPROM                   00E0H    0007H
+  +--> ?PR?SYS_EEPROM
+  +--> ?PR?IAPIDLE?SYS_EEPROM
+
+?PR?_DRV_LEDSHOWNUMBER?DRIVE_LED                 00BBH    0002H
+  +--> ?PR?DRIVE_LED
+
+?PR?_APP_CONFIGWRITE?APP_CONFIG                  -----    -----
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 6
+
+
+  +--> ?PR?_HWA_EEPROMWRITESECTOR?HWA_EEPROM
+
+?PR?_HWA_EEPROMWRITESECTOR?HWA_EEPROM            00C0H    000EH
+  +--> ?PR?HWA_EEPROM
+  +--> ?CO?HWA_EEPROM_CFG
+  +--> ?PR?_HWA_EEPROMCHECK?HWA_EEPROM
+  +--> ?PR?_HWA_EEPROMREADSECTOR?HWA_EEPROM
+  +--> ?PR?_HWA_EEPROMENCRYPT?HWA_EEPROM_CFG
+  +--> ?PR?_SYS_EEPROMERASESECTOR?SYS_EEPROM
+  +--> ?PR?_SYS_EEPROMWRITE?SYS_EEPROM
+
+?PR?_HWA_EEPROMENCRYPT?HWA_EEPROM_CFG            00CEH    0005H
+  +--> ?PR?HWA_EEPROM_CFG
+
+?PR?APP_TIMEINIT?APP_TIME                        -----    -----
+  +--> ?PR?APP_TIMELOAD?APP_TIME
+
+?PR?APP_TIMELOAD?APP_TIME                        00BAH    0001H
+
+?PR?SYS_TASKINIT?SYS_CORE                        -----    -----
+  +--> ?PR?SYS_TASKWATCHDOGINIT?SYS_CPU
+  +--> ?PR?SYS_TIMEINIT?SYS_CPU
+
+?PR?SYS_TASKADD?SYS_TASK                         -----    -----
+  +--> ?PR?DRV_LEDHANDLER1MS?DRIVE_LED
+  +--> ?PR?SYS_TASK
+  +--> ?PR?_SYS_TASKCREATE?SYS_CORE
+  +--> ?PR?DRV_BUZZERHANDLER10MS?DRIVE_BUZZER
+  +--> ?PR?APP_BRUSHCYCLE200MS?APP_BRUSH
+  +--> ?PR?APP_TIMEDISPLAY500MS?APP_TIME
+  +--> ?PR?APP_TIMEPOWER1MIN?APP_TIME
+  +--> ?PR?APP_SHOW?APP_BRUSH
+
+?PR?DRV_LEDHANDLER1MS?DRIVE_LED                  -----    -----
+  +--> ?CO?DRIVE_LED
+
+?PR?_SYS_TASKCREATE?SYS_CORE                     00BAH    0006H
+  +--> ?PR?SYS_CORE
+
+?PR?APP_BRUSHCYCLE200MS?APP_BRUSH                00BAH    0002H
+  +--> ?PR?_APP_BRUSHNOTIFYBRUSH?APP_BRUSH
+  +--> ?PR?APP_BRUSHCARD?APP_BRUSH
+  +--> ?PR?APP_BRUSH
+  +--> ?PR?_DRV_BUZZERNUMBER?DRIVE_BUZZER
+  +--> ?PR?_READ_BLOCK?MIFARE
+  +--> ?PR?_APP_CONFIGWRITE?APP_CONFIG
+  +--> ?PR?_DRV_LEDREQUESTDISPLAYCHANNEL?DRI...
+  +--> ?PR?_HWA_MIFAREREADSECTOR?HWA_MIFARE
+  +--> ?PR?RETURNCARDID?APP_BRUSH
+  +--> ?PR?_HWA_MIFAREWRITESECTOR?HWA_MIFARE
+  +--> ?PR?_APP_BRUSHNOTIFYREFUND?APP_BRUSH
+
+?PR?_APP_BRUSHNOTIFYBRUSH?APP_BRUSH              00BCH    0002H
+  +--> ?PR?_APP_CONFIGWRITE?APP_CONFIG
+  +--> ?PR?_DRV_BUZZERNUMBER?DRIVE_BUZZER
+
+?PR?APP_BRUSHCARD?APP_BRUSH                      00BCH    0002H
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 7
+
+
+  +--> ?CO?APP_BRUSH
+  +--> ?PR?_LOAD_KEY?MIFARE
+  +--> ?PR?MIF_HALT?MIFARE
+  +--> ?PR?_REQUEST?MIFARE
+  +--> ?PR?ANTICOLL?MIFARE
+  +--> ?PR?SELECTCARD?MIFARE
+  +--> ?PR?_AUTHENTICATION?MIFARE
+
+?PR?_LOAD_KEY?MIFARE                             00BEH    0011H
+  +--> ?PR?MIFARE
+  +--> ?PR?_COMMAND_SEND?MIFARE
+  +--> ?PR?_SPIREADONE?MIFARE
+
+?PR?_COMMAND_SEND?MIFARE                         00D9H    0005H
+  +--> ?PR?MIFARE
+  +--> ?PR?CLEAR_FIFO?MIFARE
+  +--> ?PR?_WRITE_FIFO?MIFARE
+  +--> ?PR?_SPIREADONE?MIFARE
+
+?PR?CLEAR_FIFO?MIFARE                            -----    -----
+  +--> ?PR?MIFARE
+  +--> ?PR?_SPIWRITEONE?MIFARE
+
+?PR?_WRITE_FIFO?MIFARE                           00DEH    0004H
+  +--> ?PR?MIFARE
+  +--> ?PR?_SPIWRITEONE?MIFARE
+
+?PR?MIF_HALT?MIFARE                              -----    -----
+  +--> ?PR?_SPIWRITEONE?MIFARE
+  +--> ?PR?MIFARE
+  +--> ?PR?_COMMAND_SEND?MIFARE
+
+?PR?_REQUEST?MIFARE                              -----    -----
+  +--> ?PR?_SPIWRITEONE?MIFARE
+  +--> ?PR?_SPIREADONE?MIFARE
+  +--> ?PR?MIFARE
+  +--> ?PR?_COMMAND_SEND?MIFARE
+  +--> ?PR?_READ_FIFO?MIFARE
+
+?PR?_READ_FIFO?MIFARE                            00D9H    0003H
+  +--> ?PR?MIFARE
+  +--> ?PR?_SPIREADONE?MIFARE
+
+?PR?ANTICOLL?MIFARE                              -----    -----
+  +--> ?PR?_SPIWRITEONE?MIFARE
+  +--> ?PR?MIFARE
+  +--> ?PR?_COMMAND_SEND?MIFARE
+  +--> ?PR?_SPIREADONE?MIFARE
+
+?PR?SELECTCARD?MIFARE                            -----    -----
+  +--> ?PR?_SPIWRITEONE?MIFARE
+  +--> ?PR?MIFARE
+  +--> ?PR?_COMMAND_SEND?MIFARE
+  +--> ?PR?_SPIREADONE?MIFARE
+
+?PR?_AUTHENTICATION?MIFARE                       00BEH    0005H
+  +--> ?PR?MIFARE
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 8
+
+
+  +--> ?PR?_COMMAND_SEND?MIFARE
+  +--> ?PR?_SPIREADONE?MIFARE
+
+?PR?_READ_BLOCK?MIFARE                           00C1H    0005H
+  +--> ?PR?MIFARE
+  +--> ?PR?_COMMAND_SEND?MIFARE
+  +--> ?PR?_READ_FIFO?MIFARE
+
+?PR?_DRV_LEDREQUESTDISPLAYCHANNEL?DRI...         00C0H    0003H
+  +--> ?PR?DRIVE_LED
+
+?PR?_HWA_MIFAREREADSECTOR?HWA_MIFARE             00BCH    0005H
+  +--> ?PR?HWA_MIFARE
+  +--> ?PR?_READ_BLOCK?MIFARE
+  +--> ?PR?HWA_MIFARECHECKBLOCK?HWA_MIFARE
+  +--> ?PR?_WRITE_BLOCK?MIFARE
+
+?PR?HWA_MIFARECHECKBLOCK?HWA_MIFARE              00C1H    0002H
+  +--> ?PR?_HWA_MIFARECHECKOUT?HWA_MIFARE
+
+?PR?_HWA_MIFARECHECKOUT?HWA_MIFARE               00C4H    0006H
+  +--> ?PR?HWA_MIFARE
+
+?PR?_WRITE_BLOCK?MIFARE                          00C4H    0015H
+  +--> ?PR?MIFARE
+  +--> ?PR?_SPIWRITEONE?MIFARE
+  +--> ?PR?_COMMAND_SEND?MIFARE
+  +--> ?PR?_READ_FIFO?MIFARE
+
+?PR?_HWA_MIFAREWRITESECTOR?HWA_MIFARE            00C0H    0004H
+  +--> ?PR?HWA_MIFARE
+  +--> ?PR?_HWA_MIFARECHECKOUT?HWA_MIFARE
+  +--> ?PR?_WRITE_BLOCK?MIFARE
+
+?PR?_APP_BRUSHNOTIFYREFUND?APP_BRUSH             00BCH    0004H
+  +--> ?PR?APP_BRUSH
+  +--> ?PR?_HWA_MIFAREWRITESECTOR?HWA_MIFARE
+  +--> ?PR?_APP_CONFIGWRITE?APP_CONFIG
+  +--> ?PR?_DRV_LEDREQUESTDISPLAYCHANNEL?DRI...
+
+?PR?APP_TIMEDISPLAY500MS?APP_TIME                00BAH    0003H
+  +--> ?PR?APP_TIME
+  +--> ?PR?_DRV_RELAYCLOSE?DRIVE_RELAY
+  +--> ?PR?_DRV_RELAYOPEN?DRIVE_RELAY
+  +--> ?PR?_DRV_LEDDISPLAYCHANNEL?DRIVE_LED
+
+?PR?_DRV_LEDDISPLAYCHANNEL?DRIVE_LED             00BDH    0002H
+  +--> ?PR?DRIVE_LED
+
+?PR?APP_TIMEPOWER1MIN?APP_TIME                   00BAH    0003H
+  +--> ?PR?APP_TIME
+  +--> ?PR?_APP_TIMECLEAR?APP_TIME
+
+?PR?_APP_TIMECLEAR?APP_TIME                      00BDH    0001H
+  +--> ?PR?APP_TIME
+  +--> ?PR?_HWA_EEPROMWRITESECTOR?HWA_EEPROM
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 9
+
+
+?PR?APP_SHOW?APP_BRUSH                           -----    -----
+  +--> ?PR?_SYS_DELAYMS?SYS_DELAY
+  +--> ?PR?APP_BRUSH
+  +--> ?PR?_SYS_TASKDEL?SYS_CORE
+  +--> ?PR?_DRV_LEDSHOWNUMBER?DRIVE_LED
+
+?PR?_SYS_TASKDEL?SYS_CORE                        00BAH    0003H
+  +--> ?PR?SYS_CORE
+
+?PR?SYS_TASKSTART?SYS_CORE                       00BAH    0001H
+  +--> ?PR?SYS_CORE
+  +--> ?PR?SYS_TASKWATCHDOG?SYS_CPU
+  +--> ?PR?SYS_TASKSLEEP?SYS_CPU
+
+
+
+SYMBOL TABLE OF MODULE:  project (SYS_CORE)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?COPY
+  C:00F6H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?CLDPTR
+  C:011CH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0135H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?CILDPTR
+  C:0162H         PUBLIC        ?C?CILDPTR
+  -------         ENDMOD        ?C?CILDPTR
+
+  -------         MODULE        ?C?CILDOPTR
+  C:0184H         PUBLIC        ?C?CILDOPTR
+  -------         ENDMOD        ?C?CILDOPTR
+
+  -------         MODULE        ?C?CSTPTR
+  C:01B7H         PUBLIC        ?C?CSTPTR
+  -------         ENDMOD        ?C?CSTPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:01C9H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+  -------         MODULE        ?C?IMUL
+  C:01EBH         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+  -------         MODULE        ?C?UIDIV
+  C:01FDH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/30/2015  23:53:45  PAGE 10
+
+
+  -------         MODULE        ?C?IILDX
+  C:0252H         PUBLIC        ?C?IILDX
+  -------         ENDMOD        ?C?IILDX
+
+  -------         MODULE        ?C?ILDIX
+  C:0268H         PUBLIC        ?C?ILDIX
+  -------         ENDMOD        ?C?ILDIX
+
+  -------         MODULE        ?C?ICALL
+  C:027EH         PUBLIC        ?C?ICALL
+  C:0282H         PUBLIC        ?C?ICALL2
+  -------         ENDMOD        ?C?ICALL
+
+  -------         MODULE        STRLEN
+  C:209AH         PUBLIC        _STRLEN
+  -------         ENDMOD        STRLEN
+
+  -------         MODULE        ?C?MEMCMP
+  C:040AH         PUBLIC        ?C?MEMCMP
+  -------         ENDMOD        ?C?MEMCMP
+
+  -------         MODULE        ?C?MEMSET
+  C:042EH         PUBLIC        ?C?MEMSET
+  -------         ENDMOD        ?C?MEMSET
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SYS_UARTSETCHANNEL?SYS_UART
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SYS_UARTSENDSTRING?SYS_UART
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SYS_UARTREADDATA?SYS_UART
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SYS_UARTOVERTIME1MS?SYS_UART
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_APP_TIMEADDMONEY?APP_TIME
+
+Program Size: data=48.1 xdata=354 code=8624
+LINK/LOCATE RUN COMPLETE.  5 WARNING(S),  0 ERROR(S)
