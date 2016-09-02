@@ -315,8 +315,13 @@ void app_brushCycle500ms(void)
             }
         }
 
-        if (!b_f_faultFlag && hwa_fm1702ReadSector(gBuff, s_System.Sector))// 继电器或采样电阻故障
-        {            
+        if (hwa_fm1702ReadSector(gBuff, s_System.Sector))
+        {   
+            if(b_f_faultFlag)// 继电器或采样电阻故障
+            {
+                drv_buzzerNumber(4);
+                break;
+            }
             if (s_System.Refund == FALSE
                 || u16_DisplayTime == 0
                 || u8_BrushSelChannelTime != 0
