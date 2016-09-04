@@ -10,9 +10,11 @@ void drv_ledSetTime(UINT16 time);
 void drv_ledSetPulse(UINT16 pulse);
 void drv_ledDispalyVlaue(UINT16 value);
 void drv_ledDisplayMoney(UINT16 money);
+void drv_ledDisplayPayMoney(UINT16 money);
 void drv_ledSetMoney(UINT16 money);
 void drv_ledRuning(BOOL pulse);
-void drv_ledRuningOff(void);
 void drv_ledError(BOOL error);
+void drv_ledAllOn(void);
+void drv_ledAllOff(void);
 
 #endif

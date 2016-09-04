@@ -16,7 +16,6 @@ UINT8 taskCycleCnt500ms = 0;
 UINT8 taskCycleCnt60s = 0;
 BOOL taskCycle10msFlag = FALSE;
 BOOL taskCycle500msFlag = FALSE;
-BOOL b_pulse = FALSE;
 
 void sys_taskInit(void)
 {
@@ -69,10 +68,9 @@ void sys_tim0Isr(void) interrupt 1      //1ms cycle task
         b_oldPulse = P10;
         if(b_oldPulse)
         {
-            b_pulse = TRUE;
             u16_pulseCounter++;
         }
-        drv_ledRuning(b_pulse);
+        drv_ledRuning(b_oldPulse);
     }
     
     drv_ledError(b_f_faultFlag);

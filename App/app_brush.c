@@ -25,10 +25,9 @@ void app_Show(void)
 	if (b_FactorySystem == FALSE)
 	{
 		sys_delayms(1000);
-        drv_ledDisplayMoney(Money);
+        drv_ledDisplayPayMoney(Money);
 		sys_delayms(1000);
 	}
-    drv_ledRuningOff();
 }
 
 void app_brushInit(void)
@@ -168,6 +167,7 @@ void app_brushMemSetting(void)
 			}
             else if (testBuff[0] == 0xFF && testBuff[1] == 0xFF)		//≤‚ ‘ø®
 			{
+                drv_ledAllOn();
                 if(app_testGetFuseFaultState() == FALSE)
                 {
 			        drv_buzzerNumber(1);
@@ -176,6 +176,10 @@ void app_brushMemSetting(void)
                     while(u8_pulseCounterTestTime < 100)
                     {
                         u8_pulseCounterTestTime++;
+                        if(u8_pulseCounterTestTime == 30)
+                        {
+                            drv_ledAllOff();
+                        }
                         drv_ledDispalyVlaue(u16_pulseCounter);
                         sys_delayms(100);
                     }

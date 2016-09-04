@@ -2,6 +2,8 @@
 #include "drive_led.h"
 #include "sys_delay.h"
 
+BOOL b_OnAllFlag = FALSE;
+
 sbit LED_CS0 = P2 ^ 1;
 sbit LED_CS1 = P2 ^ 2;
 sbit LED_CS2 = P2 ^ 3;
@@ -63,7 +65,7 @@ code UINT8 ledCoding[] = {
                             SEG_F,SEG_LINE,SEG_P,SEG_U,SEG_NULL,
                             SEG_FULL
                         };
-bdata UINT8 u8_ledDisBuff[5] = { 1, 7, 0, 1 , 0xFF}; // P-1701
+bdata UINT8 u8_ledDisBuff[5] = { 1, 7, 0, 1 , 0x00}; // P-1701
 static data UINT8 u8_ledIndex = 0;//从左到右为0,1,2
 
 sbit sbit_set           = u8_ledDisBuff[4]^7;   //设置
@@ -81,23 +83,6 @@ void drv_ledInit(void)
 	P2M0 |= 0x3F;
 	P3M1 &= ~0xFC;      //推挽输出
 	P3M0 |= 0xFC;
-    
-    sbit_set    = 1;
-    sbit_time   = 1;
-    sbit_money  = 1;
-    sbit_point  = 1;
-    sbit_pulse  = 1;
-    sbit_error  = 1;
-    sbit_yuan   = 1;
-
-    LED_CS0 = SEG_ON;
-    LED_CS1 = SEG_ON;
-    LED_CS2 = SEG_ON;
-    LED_CS3 = SEG_ON;
-    LED_CS4 = SEG_ON;
-    SEG_PORT &= ~0xFC;
-    P20 = 0;
-    sys_delayms(100);
 }
 
 /* LED动态显示 */
@@ -228,6 +213,16 @@ void drv_ledDisplayMoney(UINT16 money)
     sbit_yuan   = 1;
 }
 
+void drv_ledDisplayPayMoney(UINT16 money)
+{
+    drv_ledDispalyVlaue(money/10);
+    sbit_set    = 0;
+    sbit_time   = 0;
+    sbit_money  = 1;
+    sbit_point  = 0;
+    sbit_yuan   = 0;
+}
+
 void drv_ledSetMoney(UINT16 money)
 {
     drv_ledDisplayMoney(money);
@@ -236,19 +231,39 @@ void drv_ledSetMoney(UINT16 money)
 
 void drv_ledRuning(BOOL pulse)
 {
-    if(!sbit_set)
+    if(!sbit_set && !b_OnAllFlag)
     {
         sbit_pulse = pulse;
     }
 }
 
-void drv_ledRuningOff(void)
-{
-    sbit_pulse = 0;
-}
-
 void drv_ledError(BOOL error)
 {
-    sbit_error = error;
+    if(!b_OnAllFlag)
+    {
+        sbit_error = error;
+    }
+}
+
+void drv_ledAllOn(void)
+{    
+    b_OnAllFlag = 1;
+    sbit_set    = 1;
+    sbit_time   = 1;
+    sbit_money  = 1;
+    sbit_point  = 1;
+    sbit_pulse  = 1;
+    sbit_error  = 1;
+    sbit_yuan   = 1;
+}
+
+void drv_ledAllOff(void)
+{    
+    b_OnAllFlag = 0;
+    sbit_set    = 0;
+    sbit_time   = 0;
+    sbit_money  = 0;
+    sbit_point  = 0;
+    sbit_yuan   = 0;
 }
 
