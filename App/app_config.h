@@ -10,6 +10,9 @@
 #define SET_FUN_TIME			(0x00)
 #define SET_FUN_POWER			(0x01)
 
+#define MAX_PULSE_NUM           (300)
+#define MAX_MONEY               (500)
+
 
 typedef struct
 {

@@ -17,6 +17,8 @@
 code UINT8 PWD_Card[] = { 0xAC, 0x1E, 0x57, 0xAF, 0x19, 0x4E };	//密码卡密码
 data UINT8 LastCardId[5] = {0x00,0x00,0x00,0x00,0x00};
 
+UINT16 u16_pulseCounter = 0;
+
 void app_Show(void)
 {
 	UINT32 Money = s_Money.MoneySum / 10 % 1000000;
@@ -26,6 +28,7 @@ void app_Show(void)
         drv_ledDisplayMoney(Money);
 		sys_delayms(1000);
 	}
+    drv_ledRuningOff();
 }
 
 void app_brushInit(void)
@@ -108,6 +111,7 @@ void app_brushMemSetting(void)
 	BOOL flag = FALSE;
     #define U8_FIRST_BRUSH_CARD_DLY     6
 	UINT8 u8_FirstBrushCardDly = 0;			//第一次刷管理卡显示信息，再次刷则更改
+	UINT8 u8_pulseCounterTestTime = 0;
     
     app_timeClear();          //清除时间
     
@@ -128,7 +132,7 @@ void app_brushMemSetting(void)
 				if (u8_FirstBrushCardDly)
 				{
 					s_System.Money += 10;
-					if (s_System.Money > 200)
+					if (s_System.Money > MAX_MONEY)
 					{
 						s_System.Money = 10;
 					}
@@ -154,7 +158,7 @@ void app_brushMemSetting(void)
 				if (u8_FirstBrushCardDly)
 				{
 					s_System.PulseCount += 1;
-					if (s_System.PulseCount > 100)
+					if (s_System.PulseCount > MAX_PULSE_NUM)
 					{
 						s_System.PulseCount = 1;
 					}
@@ -164,9 +168,21 @@ void app_brushMemSetting(void)
 			}
             else if (testBuff[0] == 0xFF && testBuff[1] == 0xFF)		//测试卡
 			{
-                app_testGetFuseState();
-                u16_DisplayTime = 100;
-                u8_FirstBrushCardDly = U8_FIRST_BRUSH_CARD_DLY;
+                if(app_testGetFuseFaultState() == FALSE)
+                {
+			        drv_buzzerNumber(1);
+                    u16_pulseCounter = 0;
+                    b_testMode = TRUE;
+                    while(u8_pulseCounterTestTime < 100)
+                    {
+                        u8_pulseCounterTestTime++;
+                        drv_ledDispalyVlaue(u16_pulseCounter);
+                        sys_delayms(100);
+                    }
+                    drv_relayClose();
+			        drv_buzzerNumber(1);
+                    return;
+                }
 			}
             else
             {
@@ -190,76 +206,47 @@ void app_brushCycle500ms(void)
 	UINT16 Money;
 #define BRUSH_SEL_CHANNEL_TIME             20
 	static UINT8 u8_BrushSelChannelTime = 0;
-    static UINT8 u8_PowerOnCounter = 6;
-    static BOOL b_ReadConfigFlag = FALSE;
+    static BOOL b_PowerOn = TRUE;
     
     if(u8_BrushSelChannelTime)
     {
         u8_BrushSelChannelTime--;
     }
-    
-    if(u8_PowerOnCounter)
-    {
-        u8_PowerOnCounter--;
-    }
-    
+
     switch (app_brushCard())
     {
     case MEM_CARD:
         app_brushMemSetting();
         break;
 
-    case PWD_CARD:										//从初始卡中读取管理卡密码，并储存至E2
-        if(u8_PowerOnCounter)
+    case PWD_CARD:				
+        b_testMode = FALSE;						
+        if(b_PowerOn && b_FactorySystem == FALSE)       //从E2中读取配置，写入密码卡中，如果未初始化，不允许写密码卡
         {
-            b_ReadConfigFlag = TRUE;
-            gBuff[0] = s_System.MGM_Card[0];
-            gBuff[1] = s_System.MGM_Card[1];
-            gBuff[2] = s_System.MGM_Card[2];
-            gBuff[3] = s_System.MGM_Card[3];
-            gBuff[4] = s_System.MGM_Card[4];
-            gBuff[5] = s_System.MGM_Card[5];
-            gBuff[6] = s_System.Sector;
-            gBuff[7] = 0;
-            gBuff[8] = 0;
-            gBuff[9] = 0;
-            gBuff[10] = s_System.USER_Card[0];
-            gBuff[11] = s_System.USER_Card[1];
-            gBuff[12] = s_System.USER_Card[2];
-            gBuff[13] = s_System.USER_Card[3];
-            gBuff[14] = s_System.USER_Card[4];
-            gBuff[15] = s_System.USER_Card[5];
-            if(hwa_fm1702WriteBlock(gBuff, 4, FALSE))
+            gBuff[0]  = s_System.RecoveryOldCard;
+            gBuff[1]  = 0;
+            gBuff[2]  = s_System.Refund;
+            gBuff[3]  = 0;
+            gBuff[4]  = 0;
+            gBuff[5]  = s_System.Money>>8;
+            gBuff[6]  = s_System.Money;
+            gBuff[7]  = s_System.Time>>8;
+            gBuff[8]  = s_System.Time;
+            gBuff[9]  = 0;
+            gBuff[10] = 0;
+            gBuff[11] = s_System.PulseCount>>8;
+            gBuff[12] = s_System.PulseCount;
+            gBuff[13] = 0;
+            gBuff[14] = 0;
+            gBuff[15] = 0;
+            if(hwa_fm1702WriteBlock(gBuff, 5, FALSE))
             {
-                gBuff[0]  = s_System.RecoveryOldCard;
-                gBuff[1]  = 0;
-                gBuff[2]  = s_System.Refund;
-                gBuff[3]  = 0;
-                gBuff[4]  = 0;
-                gBuff[5]  = s_System.Money>>8;
-                gBuff[6]  = s_System.Money;
-                gBuff[7]  = s_System.Time>>8;
-                gBuff[8]  = s_System.Time;
-                gBuff[9]  = 0;
-                gBuff[10] = 0;
-                gBuff[11] = s_System.PulseCount>>8;
-                gBuff[12] = s_System.PulseCount;
-                gBuff[13] = 0;
-                gBuff[14] = 0;
-                gBuff[15] = 0;
-                if(hwa_fm1702WriteBlock(gBuff, 5, FALSE))
-                {
-                    u8_PowerOnCounter = 0;
-                    drv_buzzerOn(50);
-                }
+                drv_buzzerOn(50);
+                sys_delayms(5000);
             }
         }
-        else if (!b_ReadConfigFlag && hwa_fm1702ReadBlock(gBuff, 4))			//读取管理卡和用户卡密码以及扇区
+        else if (hwa_fm1702ReadBlock(gBuff, 4))			//读取管理卡和用户卡密码以及扇区
         {
-            if (hwa_fm1702ReadBlock(gBuff, 4) == FALSE)         //读取管理卡和用户卡密码以及扇区
-            {
-                break;
-            }
             s_System.MGM_Card[0] = gBuff[0];
             s_System.MGM_Card[1] = gBuff[1];
             s_System.MGM_Card[2] = gBuff[2];
@@ -273,7 +260,7 @@ void app_brushCycle500ms(void)
             s_System.USER_Card[3] = gBuff[13];
             s_System.USER_Card[4] = gBuff[14];
             s_System.USER_Card[5] = gBuff[15];
-            if (hwa_fm1702ReadBlock(gBuff, 5) == FALSE)			//读取管理卡和用户卡密码以及扇区
+            if (hwa_fm1702ReadBlock(gBuff, 5) == FALSE)	//读取管理卡和用户卡密码以及扇区
             {
                 break;
             }
@@ -290,7 +277,6 @@ void app_brushCycle500ms(void)
             drv_ledDispalyVlaue(s_System.Sector*100+s_System.Refund*10+s_System.RecoveryOldCard);
             drv_buzzerNumber(1);
             sys_delayms(1000);
-            sys_uartSendData((UINT8*)&s_System, 32);
         }
         break;
 
@@ -333,7 +319,7 @@ void app_brushCycle500ms(void)
                 }
                 if(u16_DisplayTime == 0)
                 {
-                    if(app_testGetFuseState())
+                    if(app_testGetFuseFaultState())
                     {
                         drv_buzzerNumber(4);
                         break;
@@ -364,7 +350,7 @@ void app_brushCycle500ms(void)
                     break;
                 }
             }
-            else if(s_System.Refund == TRUE)                        //返款
+            else if(s_System.Refund == TRUE && !memcmp(s_Money.Card_ID, gCard_UID, 5))                        //返款
             {
                 Money = app_timeRefundMoney(&pMoney->money);
                 if (hwa_fm1702WriteSector(gBuff, s_System.Sector))
@@ -389,5 +375,6 @@ void app_brushCycle500ms(void)
     }
     
     drv_fm1702EnterHardPowerDown();
+    b_PowerOn = FALSE;
 }
 

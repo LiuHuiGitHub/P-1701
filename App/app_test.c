@@ -20,7 +20,7 @@ void app_testInit(void)
     b_input = 1;
 }
 
-BOOL app_testGetFuseState(void)
+BOOL app_testGetFuseFaultState(void)
 {
     UINT8 i = 100;
     b_f_faultFlag = FALSE;

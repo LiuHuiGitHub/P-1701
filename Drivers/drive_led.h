@@ -12,6 +12,7 @@ void drv_ledDispalyVlaue(UINT16 value);
 void drv_ledDisplayMoney(UINT16 money);
 void drv_ledSetMoney(UINT16 money);
 void drv_ledRuning(BOOL pulse);
+void drv_ledRuningOff(void);
 void drv_ledError(BOOL error);
 
 #endif

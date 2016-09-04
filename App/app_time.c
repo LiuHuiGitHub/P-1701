@@ -4,6 +4,7 @@
 #include "drive_led.h"
 #include "hwa_eeprom.h"
 #include "string.h"
+#include "app_test.h"
 
 data UINT16 u16_DisplayTime = 100;//剩余时间，(显示时间的10倍)
 
@@ -39,7 +40,7 @@ void app_timeDisplay500ms(void)     //时间为0时闪烁显示通道号
 {
 	static BOOL b_lightFlash = FALSE;
     
-    if (b_FactorySystem == FALSE)
+    if (b_FactorySystem == FALSE && b_testMode == FALSE)
 	{
         if (u16_DisplayTime == 0)                       //时间为0闪烁显示通道号
         {
@@ -53,6 +54,10 @@ void app_timeDisplay500ms(void)     //时间为0时闪烁显示通道号
             drv_relayOpen();
         }
 	}
+    else if(b_FactorySystem)
+    {
+        drv_relayClose();
+    }
 }
 
 void app_timeAddTime(UINT16 money)

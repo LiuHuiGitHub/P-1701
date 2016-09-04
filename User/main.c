@@ -17,19 +17,18 @@ UINT8 taskCycleCnt60s = 0;
 BOOL taskCycle10msFlag = FALSE;
 BOOL taskCycle500msFlag = FALSE;
 BOOL b_pulse = FALSE;
-UINT16 u16_pulseCounter = 0;
 
 void sys_taskInit(void)
 {
     drv_buzzerInit();
 	drv_relayInit();
 	drv_ledInit();
-    hwa_uartInit();
+//    hwa_uartInit();
 	app_brushInit();
 	app_configInit();
 	app_timeLoad();
     app_testInit();
-    app_testGetFuseState();
+    app_testGetFuseFaultState();
 }
 
 #define T1MS (65536-FOSC/12/1000) //12T
@@ -52,7 +51,7 @@ void sys_tim0Isr(void) interrupt 1      //1ms cycle task
     static data UINT8 count1 = 0;
     static BOOL b_oldPulse = FALSE;
     drv_ledHandler1ms();
-    hwa_uartHandler1ms();
+//    hwa_uartHandler1ms();
     if(++count>=10)
     {
         drv_buzzerHandler10ms();
@@ -71,6 +70,7 @@ void sys_tim0Isr(void) interrupt 1      //1ms cycle task
         if(b_oldPulse)
         {
             b_pulse = TRUE;
+            u16_pulseCounter++;
         }
         drv_ledRuning(b_pulse);
     }
@@ -90,16 +90,12 @@ void main(void)
         if(taskCycle10msFlag)
         {
         	taskCycle10msFlag = FALSE;
-            hwa_uartHandler10ms();
-            if(b_pulse)
+//            hwa_uartHandler10ms();
+            if(u16_pulseCounter >= s_System.PulseCount)
             {
-                b_pulse = FALSE;
-                if(++u16_pulseCounter >= 25)
-                {
-                    u16_pulseCounter = 0;
-                    taskCycleCnt60s = 0;
-                    app_timePower1min();
-                }
+                u16_pulseCounter = 0;
+                taskCycleCnt60s = 0;
+                app_timePower1min();
             }
         }
         if(taskCycle500msFlag)
@@ -114,6 +110,6 @@ void main(void)
                 app_timePower1min();
 			}
         }
-        //PCON |= 0x01;
+        PCON |= 0x01;
     }
 }

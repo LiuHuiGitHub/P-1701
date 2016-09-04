@@ -361,11 +361,6 @@
               <FileType>1</FileType>
               <FilePath>..\System\sys_delay.c</FilePath>
             </File>
-            <File>
-              <FileName>sys_uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\sys_uart.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -390,11 +385,6 @@
               <FileName>hwa_eeprom_cfg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hwa\hwa_eeprom_cfg.c</FilePath>
-            </File>
-            <File>
-              <FileName>hwa_uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Hwa\hwa_uart.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -37,9 +37,9 @@ void app_configInit(void)
 		|| (s_System.Refund > 1)
 		|| (s_System.Sector > 15 || s_System.Sector < 1)
 		|| (s_System.RecoveryOldCard > 1)
-		|| (s_System.Money < 10 || s_System.Money > 200)
+		|| (s_System.Money < 10 || s_System.Money > MAX_MONEY)
 		|| (s_System.Time< 30 || s_System.Time > 600)
-		|| (s_System.PulseCount < 1 || s_System.PulseCount > 100)
+		|| (s_System.PulseCount > MAX_PULSE_NUM)
 		)
 	{
         drv_ledDispalyVlaue(8888);

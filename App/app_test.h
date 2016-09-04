@@ -8,6 +8,6 @@ extern BOOL b_f_faultFlag;
 
 void app_testInit(void);
 void app_testHandler1ms(void);
-BOOL app_testGetFuseState(void);
+BOOL app_testGetFuseFaultState(void);
 
 #endif

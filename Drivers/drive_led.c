@@ -242,6 +242,11 @@ void drv_ledRuning(BOOL pulse)
     }
 }
 
+void drv_ledRuningOff(void)
+{
+    sbit_pulse = 0;
+}
+
 void drv_ledError(BOOL error)
 {
     sbit_error = error;
